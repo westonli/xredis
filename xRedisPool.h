@@ -17,9 +17,9 @@
 #include "xRedisClient.h"
 using namespace std;
 
-#define MAX_REDIS_CONN_POOLSIZE     32      // Ã¿¸öDB×î´óÁ¬½ÓÊı
-#define MAX_REDIS_CACHE_TYPE        32      // ×î´óÖ§³ÖµÄCACHEÖÖÀàÊı
-#define MAX_REDIS_DB_HASHBASE       32      // ×î´óHASH·Ö¿â»ùÊı
+#define MAX_REDIS_CONN_POOLSIZE     32      // æ¯ä¸ªDBæœ€å¤§è¿æ¥æ•°
+#define MAX_REDIS_CACHE_TYPE        32      // æœ€å¤§æ”¯æŒçš„CACHEç§ç±»æ•°
+#define MAX_REDIS_DB_HASHBASE       32      // æœ€å¤§HASHåˆ†åº“åŸºæ•°
 
 #define GET_CONNECT_ERROR       "GetConnection ERROR"
 #define CONNECT_CLOSED_ERROR    "redis connection be closed"
@@ -86,6 +86,8 @@ public:
                 redisReply *reply = static_cast<redisReply *>(redisCommand(mCtx,"AUTH %s", mPass.c_str()));
                 if((NULL==reply)||(strcasecmp(reply->str,"OK") != 0)) {
                     bRet = false;
+                }else{
+                    bRet = true;
                 }
                 freeReplyObject(reply);
             }
